@@ -1,0 +1,16 @@
+h1 {
+    color: cadetblue;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: bold;
+    background-color: azure;
+    padding: 5px 10px;
+}
+
+p {
+    text-align: center;
+}
+
+img {
+    padding: 5px;
+}
