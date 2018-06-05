@@ -4,69 +4,44 @@ body {
     background: #777;
     width: 960px;
     font-size: 18px;
-    margin: auto;
-}
-
-h, p1 {
-    color: #777;
-    background: #ebebeb;
 }
 
 #header, #nav, #section, #aside, #footer {
     background: #ebebeb;
     text-align: center;
-    padding: 25px 10px;
-    margin: 5px;
-}
-
-.clearfix::after {
-    content: "";
-    display: block;
-    clear: both;
-  }  
-
-#section {
-    float: left;
-}
-
-#aside {
-    float: right;
-    width: 400px;
-    height: 280px;
-}
-
-#section {
-    width: 495px;
+    padding: 40px 0px;
+    margin: 10px 20px;
 }
 
 #article {
     color: #ebebeb;
     background: #777;
-    padding: 20px 5px;
+    text-align: center;
+    margin: 20px 10px;
+    padding: 20px 0px;
 }
 
-/*
-    2. Your CSS should have styles for each of the following elements:
-    * Body
-        * font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
-        * color: '#777'
-        * background: '#777'
-        * width: '960px'
-        * font-size: '18px'
-    * Header, Nav, Section, Aside, and Footer
-        * background: '#ebebeb'
-    * Article
-        * color: '#ebebeb',
-        * background: '#777'
-    * h1 and p
-        * color: '#777',
-        * background: '#ebebeb'
-    3. The widths of each section should be:
-    * section: 495px
+h1, p {
+    color: #777;
+    background: #ebebeb;
+    margin: 10px 10px;
+    padding: 15px 0;
+}
 
-    ### Helpful Hints
+#section {
+    width: 495px;
+    float: left;
+}
 
-    * For a refresher on working with Git and GitHub, consult the GitHub Supplemental Guide we sent you in class.
-    * Don't forget to review these concepts: `float`, `padding`, `margin`, `display`, `overflow`, `clear` and `text-align`.
-    * This will be a tough assignment. But 23 weeks from now, you'll look back to this exercise and realize just how much you've grown as a developer. Stay positive!
-*/
+#aside {
+    float: left;
+    width: 385px;
+    height: 255px;
+}
+
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  
