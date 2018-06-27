@@ -13,4 +13,4 @@ Click on a character, click on a enemy, then attack! The path to victory is in w
 
 ## Author
 
-David Pham
+David Pham - email@davidpham.ca
