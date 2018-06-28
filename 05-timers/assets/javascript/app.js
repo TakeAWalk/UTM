@@ -1,6 +1,6 @@
 $(document).ready(function() {
   // Time limit per question
-  let timeLimi = 30;
+  let timeLimit = 30;
 
   var performance = {
     correct: 0,
