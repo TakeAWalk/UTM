@@ -1,10 +1,10 @@
-# Star Wars RPG
+# Netflix Trivia
 
-Take control of one of four Star Wars characters and battle your way to victory.
+It's a race against the clock to answer these tricky Netflix questions. Can you ace the test?
 
 ## How do I play?
 
-Click on a character, click on a enemy, then attack! The path to victory is in who you fight and when you fight them.
+When you're ready, click start. Answer the questions by selecting the appropirate answer. No fret, if you get one wrong, we'll let you know.
 
 ## Built With
 
