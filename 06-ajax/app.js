@@ -21,34 +21,46 @@ function createButtons(elementID) {
     $('#' + elementID).append(
       '<button id = ' + i + '>' + topics[i] + '</button>'
     );
-    //Assign click function to each index
-    $('#' + i).click(function() {
-      //javascript, jQuery
-      $.ajax({
-        url:
-          'http://api.giphy.com/v1/gifs/search?q=mad+men&api_key=kVEh3AuPwGkBkRK9x540E5QC5E7RGekm&limit=5',
-        method: 'GET'
-      }).then(function(response) {
-        console.log(response);
-        populateImages(response);
-      });
 
-      //TODO: Grab 10 static non-animated gif images from the GIPHY API and place it on this page
+    //Assign click function to each index
+    $('#' + i).click(function(topics) {
+      queryGiphy(this.id);
 
       //TODO: Display rating (PG, G, etc)
-
       //TODO: When the user click one of the still GIPHY images, the gif should animate. If the user click the gif again, it should stop playing
     });
   }
 }
 
 function populateImages(response) {
+  //TODO: Grab 10 static non-animated gif images from the GIPHY API and place it on this page
   for (var i = 0; i < response.data.length; i++) {
     console.log(response.data[i].images.downsized_still.url);
     $('#images').append(
-      '<img src="' + response.data[i].images.downsized_still.url + '"></img>'
+      '<p>Rating: ' +
+        response.data[i].rating +
+        '<br /><img src="' +
+        response.data[i].images.downsized_still.url +
+        '" class="img-fluid"></img></p>'
     );
   }
+}
+
+function queryGiphy(callingElement) {
+  //Create giphy URL
+  var queryURL =
+    'http://api.giphy.com/v1/gifs/search?q=' +
+    topics[callingElement] +
+    '&api_key=kVEh3AuPwGkBkRK9x540E5QC5E7RGekm&limit=10';
+
+  //Make API call to Giphy
+  $.ajax({
+    url: queryURL,
+    method: 'GET'
+  }).then(function(response) {
+    console.log(response);
+    populateImages(response);
+  });
 }
 
 $(document).ready(function() {
