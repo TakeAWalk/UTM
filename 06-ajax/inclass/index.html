@@ -15,20 +15,23 @@
     <form>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">First persons name</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" value="Taylor Swift"></textarea>
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea2">Second persons name</label>
-            <textarea class="form-control" id="exampleFormControlTextarea2" rows="1"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea2" rows="1" value="John Doe"></textarea>
         </div>
-        <button id='findout' class="btn btn-primary mb-2">Find out</button>
+        <h1 id='findout' class="btn btn-primary mb-2">Find out</h1>
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
 
+
         $("#findout").click(function () {
-            var queryURL = 'https://love-calculator.p.mashape.com/getPercentage?fname=Ali&sname=Taylor';
+            var firstName = $("#exampleFormControlTextarea1").val();
+            var secondName = $("#exampleFormControlTextarea2").val()
+            var queryURL = 'https://love-calculator.p.mashape.com/getPercentage?fname=' + firstName + '&sname=' + secondName;
             $.ajax({
                 url: queryURL,
                 method: "GET",
@@ -38,7 +41,7 @@
                     xhr.setRequestHeader("Accept", "application/json");
                 }
             }).then(function (response) {
-                $("#response").text(JSON.stringify(response));
+                $("#response").text(JSON.stringify('Likelyhood of match?: ' + response.percentage + '%. ' + response.result));
             });
         })
     </script>
