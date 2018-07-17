@@ -83,7 +83,7 @@ function populateImages(response) {
 function queryGiphy(callingElement) {
   //Create giphy URL
   var queryURL =
-    'http://api.giphy.com/v1/gifs/search?q=' +
+    'https://api.giphy.com/v1/gifs/search?q=' +
     topics[callingElement] +
     '&api_key=' +
     apiKey +
