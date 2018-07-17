@@ -61,7 +61,7 @@ function populateImages(response) {
     giphyS.addClass('col-3');
 
     // Add container to html
-    $('#images').append(giphyS);
+    $('#images').prepend(giphyS);
   }
 
   $('.gif').on('click', function() {
