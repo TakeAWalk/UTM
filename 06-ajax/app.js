@@ -1,5 +1,7 @@
+// Giphy API key
 var apiKey = 'kVEh3AuPwGkBkRK9x540E5QC5E7RGekm';
 
+// List of topics
 var topics = [
   'Anne',
   'Alias Grace',
@@ -14,6 +16,7 @@ var topics = [
   'The Returned'
 ];
 
+// Create buttons
 function createButtons(elementID) {
   //Loop through the topics array
   for (var i = 0; i < topics.length; i++) {
@@ -29,26 +32,36 @@ function createButtons(elementID) {
     //Assign click function to each index
     $('#' + i).click(function(topics) {
       queryGiphy(this.id);
-
-      //TODO: Display rating (PG, G, etc)
-      //TODO: When the user click one of the still GIPHY images, the gif should animate. If the user click the gif again, it should stop playing
     });
   }
 }
 
 function populateImages(response) {
-  //TODO: Grab 10 static non-animated gif images from the GIPHY API and place it on this page
+  // Grab 10 static non-animated gif images from the GIPHY API and place it on this page
   for (var i = 0; i < response.data.length; i++) {
-    $('#images').append('Rating: ' + response.data[i].rating);
+    // Create container for gif
+    var giphyS = $('<section>');
 
+    // Add rating
+    giphyS.append('Rating: ' + response.data[i].rating);
+
+    // Add image
     var giphyImg = $('<img>');
-    giphyImg.attr('src', response.data[i].images.downsized_still.url);
+    giphyImg.attr('src', response.data[i].images.fixed_height_still.url);
     giphyImg.attr('data-still', response.data[i].images.fixed_height_still.url);
     giphyImg.attr('data-animate', response.data[i].images.fixed_height.url);
     giphyImg.attr('data-state', 'still');
     giphyImg.addClass('gif');
+    giphyS.addClass('img-fluid');
 
-    $('#images').append(giphyImg);
+    // Add image to container
+    giphyS.append(giphyImg);
+
+    // Add bootstrap layout
+    giphyS.addClass('col-3');
+
+    // Add container to html
+    $('#images').append(giphyS);
   }
 
   $('.gif').on('click', function() {
@@ -86,18 +99,24 @@ function queryGiphy(callingElement) {
   });
 }
 
+// Clear buttons from html
 function clearButtons() {
   $('#buttons').html('');
 }
 
 $(document).ready(function() {
-  //TODO:
+  // When page is initially loaded, create buttons from default list
   createButtons('buttons');
 
-  $('button').click(function() {
-    console.log($('#addButton').val());
+  // When "Submit" for add new button is clicked, add button
+  $('.addNewButton').click(function() {
+    // Add to button array
     topics.push($('#addButton').val());
+
+    // Remove all buttons from html to prepare for population
     clearButtons();
+
+    // Create all buttons
     createButtons('buttons');
   });
 });
