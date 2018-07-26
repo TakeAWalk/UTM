@@ -18,14 +18,36 @@ $(document).ready(function() {
     var trainSchedule = {
       trainName: $('#formGroupTrainNameInput').val(),
       destination: $('#formGroupDestinationInput').val(),
-      firstTrainTime: $('#formGroupFirstTrainTimeInput').val(),
+      firstTrainTime: moment(
+        $('#formGroupFirstTrainTimeInput')
+          .val()
+          .trim(),
+        'HH:mm'
+      ).format('X'),
       frequency: $('#formGroupFrequencyInput').val()
     };
     db.ref('trainSchedule').push(trainSchedule);
   });
 
   db.ref('trainSchedule').on('child_added', function(childSnapshot) {
-    console.log(childSnapshot.val());
+    //--- CHEAT
+    var trainNames = childSnapshot.val().trainName;
+    var trainDest = childSnapshot.val().destination;
+    var trainFrequency = childSnapshot.val().frequency;
+    var firstTrainTime = childSnapshot.val().firstTrainTime;
+    var now = moment();
+
+    var timeRemainder =
+      now.diff(moment.unix(firstTrainTime), 'minutes') % trainFrequency;
+
+    var minutesAway = trainFrequency - timeRemainder;
+
+    var nextArrival = moment()
+      .add(minutesAway, 'm')
+      .format('HH:mm');
+
+    //-- CHEAT
+
     var trainScheduleRow = $('<tr>');
     trainScheduleRow.append(
       $('<th>')
@@ -39,7 +61,10 @@ $(document).ready(function() {
         .text(childSnapshot.val().frequency),
       $('<td>')
         .attr('scope', 'col')
-        .text(childSnapshot.val().firstTrainTime)
+        .text(nextArrival),
+      $('<td>')
+        .attr('scope', 'col')
+        .text(minutesAway)
     );
     $('#trainSchedule').append(trainScheduleRow);
   });
