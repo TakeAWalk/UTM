@@ -17,7 +17,7 @@ Refresh the page to load recent train timing. You can add a train schedule by fi
 - [Bootstrap](https://getbootstrap.com)
 - [jQuery](http://www.jquery.com)
 - [Firebase](https://firebase.google.com)
-- [Moment(https://momentjs.com)
+- [Moment](https://momentjs.com)
 
 ## Author
 
