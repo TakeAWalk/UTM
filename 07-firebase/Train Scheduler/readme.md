@@ -6,7 +6,7 @@ Using Firebase, a list of train schedules are display in table. We dynamically u
 
 ## Screenshot
 
-(https://takeawalk.github.io/UTM/07-firebase/Train%20Scheduler/ss.png)
+![Image of Train Scheduler App](https://takeawalk.github.io/UTM/07-firebase/Train%20Scheduler/ss.png)
 
 ## How do I use this?
 
