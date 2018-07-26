@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <section class='container'>
+        <section class='row'>
+            <div class="jumbotron bg-dark text-light text-center col-12">
+                <h1 class="display-4">Employee Data Management</h1>
+                <p class="lead">A Comprehensive Directory of Employee Billable Hours</p>
+            </div>
+
+        </section>
+        <section class='row border mb-3'>
+            <form class='col-12'>
+                <h3>Add Employee</h3>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Employee Name</label>
+                    <input type="text" class="form-control" id="empName" placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Role</label>
+                    <input type="text" class="form-control" id="empRole" placeholder="CEO">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput3">Start Date (MM/DD/YYYY)</label>
+                    <input type="text" class="form-control" id="empStartDate" placeholder="01/08/1989">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput4">Monthly Rate</label>
+                    <input type="text" class="form-control" id="empMthRate" placeholder="200000">
+                </div>
+                <div class="form-group text-right">
+                    <button id='submit-btn' type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </section>
+        <section class='row border'>
+            <section class='col-12'>
+                <h3>Current Employee</h3>
+            </section>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Employee Name</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">Months Worked</th>
+                        <th scope="col">Monthly Rate ($)</th>
+                        <th scope="col">Total Billed ($)</th>
+                    </tr>
+                </thead>
+                <tbody id='table-body'>
+                </tbody>
+            </table>
+        </section>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <script src="app.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+</body>
+
+</html>
