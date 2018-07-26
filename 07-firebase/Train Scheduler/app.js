@@ -13,8 +13,11 @@ $(document).ready(function() {
   firebase.initializeApp(config);
   var db = firebase.database();
 
+  // Add click event to submit
   $('.btn').click(function(event) {
     event.preventDefault();
+
+    // Build trainSchedule object
     var trainSchedule = {
       trainName: $('#formGroupTrainNameInput').val(),
       destination: $('#formGroupDestinationInput').val(),
@@ -26,28 +29,32 @@ $(document).ready(function() {
       ).format('X'),
       frequency: $('#formGroupFrequencyInput').val()
     };
+
+    // Commit object to database
     db.ref('trainSchedule').push(trainSchedule);
   });
 
+  // Add value change listener
   db.ref('trainSchedule').on('child_added', function(childSnapshot) {
-    //--- CHEAT
     var trainNames = childSnapshot.val().trainName;
     var trainDest = childSnapshot.val().destination;
     var trainFrequency = childSnapshot.val().frequency;
     var firstTrainTime = childSnapshot.val().firstTrainTime;
     var now = moment();
 
+    // Calcluate time when train arrives
     var timeRemainder =
       now.diff(moment.unix(firstTrainTime), 'minutes') % trainFrequency;
 
+    // Figure out how many minutes until arrival
     var minutesAway = trainFrequency - timeRemainder;
 
+    // Format nextArrival
     var nextArrival = moment()
       .add(minutesAway, 'm')
       .format('HH:mm');
 
-    //-- CHEAT
-
+    // Insert schedule row
     var trainScheduleRow = $('<tr>');
     trainScheduleRow.append(
       $('<th>')
