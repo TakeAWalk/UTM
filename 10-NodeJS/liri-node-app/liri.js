@@ -1,49 +1,42 @@
-var request = require("request");
-
 /* 8. At the top of the `liri.js` file, add code to read and set any environment variables with the dotenv package: */
 require("dotenv").config();
 
 /* 9. Add the code required to import the `keys.js` file and store it in a variable. */
 const keys = require("./keys");
 
-/* * You should then be able to access your keys information like so */
-var Spotify = require("node-spotify-api");
-var Twitter = require("twitter");
-
-var spotify = new Spotify(keys.spotify);
-var client = new Twitter(keys.twitter);
-
 /* 10. Make it so liri.js can take in one of the following commands:
     * `my-tweets`
     * `spotify-this-song`
     * `movie-this`
     * `do-what-it-says` */
-switch (process.argv[2]) {
-  case "my-tweets":
-    /*  1. `node liri.js my-tweets` */
-    myTweets();
-    break;
-  case "spotify-this-song":
-    /*  2. `node liri.js spotify-this-song '<song name here>'` */
-    spotifyThisSong(process.argv[3]);
-    break;
-  case "movie-this":
-    /*  3. `node liri.js movie-this '<movie name here>'` */
-    movieThis(process.argv[3]);
-    break;
-  case "do-what-it-says":
-    /*   4. `node liri.js do-what-it-says`
-   
-        * Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
-     
-        * It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
-     
-        * Feel free to change the text in that document to test out the feature for other commands. */
-    break;
+run(process.argv[2], process.argv[3]);
+
+function run(command, argument) {
+  switch (command) {
+    case "my-tweets":
+      /*  1. `node liri.js my-tweets` */
+      myTweets();
+      break;
+    case "spotify-this-song":
+      /*  2. `node liri.js spotify-this-song '<song name here>'` */
+      spotifyThisSong(argument);
+      break;
+    case "movie-this":
+      /*  3. `node liri.js movie-this '<movie name here>'` */
+      movieThis(argument);
+      break;
+    case "do-what-it-says":
+      /*   4. `node liri.js do-what-it-says` */
+      doWhatItSays();
+      break;
+  }
 }
 
-/* This will show your last 20 tweets and when they were created at in your terminal/bash window. */
+/*  This will show your last 20 tweets and when they were created at in your terminal/bash window. */
 function myTweets() {
+  var Twitter = require("twitter");
+  var client = new Twitter(keys.twitter);
+
   var params = {
     screen_name: "@davidpham",
     count: 20
@@ -61,14 +54,17 @@ function myTweets() {
   });
 }
 
-/* This will show the following information about the song in your terminal/bash window
+/*  This will show the following information about the song in your terminal/bash window
         * Artist(s)
         * The song's name
         * A preview link of the song from Spotify
         * The album that the song is from */
 
-/*    * If no song is provided then your program will default to "The Sign" by Ace of Base. */
+/*  If no song is provided then your program will default to "The Sign" by Ace of Base. */
 function spotifyThisSong(songName = "The Sign") {
+  var Spotify = require("node-spotify-api");
+  var spotify = new Spotify(keys.spotify);
+
   spotify.search({ type: "track", query: songName, limit: 1 }, function(
     err,
     data
@@ -103,6 +99,8 @@ function spotifyThisSong(songName = "The Sign") {
 
 /*  * You'll use the request package to retrieve data from the OMDB API. Like all of the in-class activities, the OMDB API requires an API key. You may use `trilogy`. */
 function movieThis(movieName = "Mr. Nobody.") {
+  var request = require("request");
+
   var queryUrl =
     "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
 
@@ -129,6 +127,25 @@ function movieThis(movieName = "Mr. Nobody.") {
       console.log("Plot: " + JSON.parse(body).Plot);
       console.log("Actor[s]: " + JSON.parse(body).Actors);
     }
+  });
+}
+
+/*   * Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
+    
+    * It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
+    
+    * Feel free to change the text in that document to test out the feature for other commands. */
+function doWhatItSays() {
+  var fs = require("fs");
+  fs.readFile("random.txt", "utf8", function(error, data) {
+    if (error) {
+      return console.log(error);
+    }
+
+    var dataArr = data.split(",");
+    var command = dataArr[0];
+    var argument = dataArr[1];
+    console.log(command, argument);
   });
 }
 
