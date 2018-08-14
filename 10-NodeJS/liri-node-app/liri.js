@@ -142,88 +142,48 @@ function movieThis(movieName = "Mr. Nobody.") {
     "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
 
   request(queryUrl, function(error, response, body) {
+    var log = [];
     // If the request is successful
     if (!error && response.statusCode === 200) {
       // Parse the body of the site and recover just the imdbRating
       // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
       var title = JSON.parse(body).Title;
       console.log("Title: " + title);
-      fs.appendFile("log.txt", "Title: " + title + "\n", function(err) {
-        if (err) {
-          return console.log(err);
-        }
-      });
+      log.push("Title: " + title + "\n");
 
       var releaseYear = JSON.parse(body).Year;
       console.log("Release Year: " + releaseYear);
-      fs.appendFile("log.txt", "Year: " + releaseYear + "\n", function(err) {
-        if (err) {
-          return console.log(err);
-        }
-      });
+      log.push("Year: " + releaseYear + "\n");
 
       var imdbRating = JSON.parse(body).imdbRating;
       console.log("IMDB Rating: " + imdbRating);
-      fs.appendFile("log.txt", "IMDB Rating: " + imdbRating + "\n", function(
-        err
-      ) {
-        if (err) {
-          return console.log(err);
-        }
-      });
+      log.push("IMDB Rating: " + imdbRating + "\n");
 
       for (element in JSON.parse(body).Ratings) {
         if (JSON.parse(body).Ratings[element].Source === "Rotten Tomatoes") {
           var rottenTomatoesRating = JSON.parse(body).Ratings[element].Value;
           console.log("Rotten Tomatoes Rating: " + rottenTomatoesRating);
-
-          fs.appendFile(
-            "log.txt",
-            "Rotten Tomatoes Rating: " + rottenTomatoesRating + "\n",
-            function(err) {
-              if (err) {
-                return console.log(err);
-              }
-            }
-          );
+          log.push("Rotten Tomatoes Rating: " + rottenTomatoesRating + "\n");
         }
       }
 
       var country = JSON.parse(body).Country;
       console.log("Country[ies]: " + country);
-      fs.appendFile("log.txt", "Country[ies]: " + country + "\n", function(
-        err
-      ) {
-        if (err) {
-          return console.log(err);
-        }
-      });
+      log.push("Country[ies]: " + country + "\n");
 
       var language = JSON.parse(body).Language;
       console.log("Language[s]:" + language);
-      fs.appendFile("log.txt", "Language[s]: " + language + "\n", function(
-        err
-      ) {
-        if (err) {
-          return console.log(err);
-        }
-      });
+      log.push("Language[s]: " + language + "\n");
 
       var plot = JSON.parse(body).Plot;
       console.log("Plot: " + plot);
-      fs.appendFile("log.txt", "Plot: " + plot + "\n", function(err) {
-        if (err) {
-          return console.log(err);
-        }
-      });
+      log.push("Plot: " + plot + "\n");
 
       var actors = JSON.parse(body).Actors;
       console.log("Actor[s]: " + actors);
-      fs.appendFile("log.txt", "Actors: " + actors + "\n", function(err) {
-        if (err) {
-          return console.log(err);
-        }
-      });
+      log.push("Actors: " + actors + "\n");
+
+      writeLog(log);
     }
   });
 }
@@ -254,8 +214,9 @@ function doWhatItSays() {
 
 * Do not overwrite your file each time you run a command. */
 function writeLog(log) {
+  console.log(log);
   for (element in log) {
-    fs.appendFile("log.txt", element, function(err) {
+    fs.appendFile("log.txt", log[element], function(err) {
       if (err) {
         return console.log(err);
       }
