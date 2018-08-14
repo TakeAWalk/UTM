@@ -21,16 +21,19 @@ A simplified SIRI. Send it one of four commands, using the command line to find 
 ## How do I use this?
 
 Use Node to run this app. Send it one of four commands
--'my-tweets'
--'spotify-this'song'
--'movie-this'
--'do-what-it-says'
+
+- 'my-tweets'
+- 'spotify-this'song'
+- 'movie-this'
+- 'do-what-it-says'
+
 And view the console for output.
 In addition, all output is written to a log.txt file.
 
 ## Built With
 
 - [NodeJS](https://nodejs.org/en/)
+- Node Packages
   - [Twitter](https://www.npmjs.com/package/twitter)
   - [Node-Spotify-API](https://www.npmjs.com/package/node-spotify-api)
   - [Request](https://www.npmjs.com/package/request)
