@@ -29,7 +29,7 @@ switch (process.argv[2]) {
     break;
   case "movie-this":
     /*  3. `node liri.js movie-this '<movie name here>'` */
-    movieThis(movieName);
+    movieThis(process.argv[3]);
     break;
   case "do-what-it-says":
     /*   4. `node liri.js do-what-it-says`
@@ -102,7 +102,35 @@ function spotifyThisSong(songName = "The Sign") {
 /*  If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.' */
 
 /*  * You'll use the request package to retrieve data from the OMDB API. Like all of the in-class activities, the OMDB API requires an API key. You may use `trilogy`. */
-function movieThis(movieName = "Mr. Nobody.") {}
+function movieThis(movieName = "Mr. Nobody.") {
+  var queryUrl =
+    "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+
+  request(queryUrl, function(error, response, body) {
+    // If the request is successful
+    if (!error && response.statusCode === 200) {
+      // Parse the body of the site and recover just the imdbRating
+      // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
+      console.log("Title: " + JSON.parse(body).Title);
+      console.log("Release Year: " + JSON.parse(body).Year);
+      console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+
+      for (element in JSON.parse(body).Ratings) {
+        JSON.parse(body).Ratings[element].Source === "Rotten Tomatoes"
+          ? console.log(
+              "Rotten Tomatoes Rating: " +
+                JSON.parse(body).Ratings[element].Value
+            )
+          : 0;
+      }
+
+      console.log("Country[ies]: " + JSON.parse(body).Country);
+      console.log("Language[s]:" + JSON.parse(body).Language);
+      console.log("Plot: " + JSON.parse(body).Plot);
+      console.log("Actor[s]: " + JSON.parse(body).Actors);
+    }
+  });
+}
 
 /* ### BONUS
 
