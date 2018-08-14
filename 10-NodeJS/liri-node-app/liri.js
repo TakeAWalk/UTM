@@ -145,7 +145,7 @@ function doWhatItSays() {
     var dataArr = data.split(",");
     var command = dataArr[0];
     var argument = dataArr[1];
-    console.log(command, argument);
+    run(command, argument);
   });
 }
 
