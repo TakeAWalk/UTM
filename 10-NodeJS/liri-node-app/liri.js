@@ -1,3 +1,5 @@
+var request = require("request");
+
 /* 8. At the top of the `liri.js` file, add code to read and set any environment variables with the dotenv package: */
 require("dotenv").config();
 
@@ -26,21 +28,8 @@ switch (process.argv[2]) {
     spotifyThisSong(process.argv[3]);
     break;
   case "movie-this":
-    /*  3. `node liri.js movie-this '<movie name here>'`
-
-        * This will output the following information to your terminal/bash window:
-            * Title of the movie.
-            * Year the movie came out.
-            * IMDB Rating of the movie.
-            * Rotten Tomatoes Rating of the movie.
-            * Country where the movie was produced.
-            * Language of the movie.
-            * Plot of the movie.
-            * Actors in the movie. */
-
-    /*    * If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.' */
-
-    /*  * You'll use the request package to retrieve data from the OMDB API. Like all of the in-class activities, the OMDB API requires an API key. You may use `trilogy`. */
+    /*  3. `node liri.js movie-this '<movie name here>'` */
+    movieThis(movieName);
     break;
   case "do-what-it-says":
     /*   4. `node liri.js do-what-it-says`
@@ -80,9 +69,7 @@ function myTweets() {
 
 /*    * If no song is provided then your program will default to "The Sign" by Ace of Base. */
 function spotifyThisSong(songName = "The Sign") {
-  console.log(songName);
-
-  spotify.search({ type: "track", query: "All the Small Things" }, function(
+  spotify.search({ type: "track", query: songName, limit: 1 }, function(
     err,
     data
   ) {
@@ -90,9 +77,32 @@ function spotifyThisSong(songName = "The Sign") {
       return console.log("Error occurred: " + err);
     }
 
-    console.log(data.items);
+    console.log("Artist[s]:");
+    for (element in data.tracks.items[0].artists)
+      console.log(data.tracks.items[0].artists[element].name);
+
+    console.log("Song Name: " + data.tracks.items[0].name);
+
+    console.log("Preview Link: " + data.tracks.items[0].preview_url);
+
+    console.log("Album: " + data.tracks.items[0].album.name);
   });
 }
+
+/*  This will output the following information to your terminal/bash window:
+        * Title of the movie.
+        * Year the movie came out.
+        * IMDB Rating of the movie.
+        * Rotten Tomatoes Rating of the movie.
+        * Country where the movie was produced.
+        * Language of the movie.
+        * Plot of the movie.
+        * Actors in the movie. */
+
+/*  If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.' */
+
+/*  * You'll use the request package to retrieve data from the OMDB API. Like all of the in-class activities, the OMDB API requires an API key. You may use `trilogy`. */
+function movieThis(movieName = "Mr. Nobody.") {}
 
 /* ### BONUS
 
