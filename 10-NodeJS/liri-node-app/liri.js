@@ -38,6 +38,7 @@ function run(command, argument) {
 function myTweets() {
   var Twitter = require("twitter");
   var client = new Twitter(keys.twitter);
+  var log = [];
 
   var params = {
     screen_name: "@davidpham",
@@ -52,14 +53,11 @@ function myTweets() {
     if (!error) {
       for (element in tweets) {
         var tweetText = tweets[element].text;
-        fs.appendFile("log.txt", tweetText + "\n", function(err) {
-          if (err) {
-            return console.log(err);
-          }
-        });
+        log.push(tweetText + "\n");
         console.log(tweetText);
       }
     }
+    writeLog(log);
   });
 }
 
@@ -73,6 +71,7 @@ function myTweets() {
 function spotifyThisSong(songName = "The Sign") {
   var Spotify = require("node-spotify-api");
   var spotify = new Spotify(keys.spotify);
+  var log = [];
 
   spotify.search({ type: "track", query: songName, limit: 1 }, function(
     err,
@@ -87,38 +86,22 @@ function spotifyThisSong(songName = "The Sign") {
     for (element in data.tracks.items[0].artists) {
       var artistName = data.tracks.items[0].artists[element].name;
       console.log(artistName);
-      fs.appendFile("log.txt", "Artist: " + artistName + "\n", function(err) {
-        if (err) {
-          return console.log(err);
-        }
-      });
+      log.push("Artist: " + artistName + "\n");
     }
 
     var sName = data.tracks.items[0].name;
-    fs.appendFile("log.txt", "Song Name: " + sName + "\n", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-    });
+    log.push("Song Name: " + sName + "\n");
     console.log("Song Name: " + sName);
 
     var previewURL = data.tracks.items[0].preview_url;
-    fs.appendFile("log.txt", "Preview Link: " + previewURL + "\n", function(
-      err
-    ) {
-      if (err) {
-        return console.log(err);
-      }
-    });
+    log.push("Preview Link: " + previewURL + "\n");
     console.log("Preview Link: " + previewURL);
 
     var album = data.tracks.items[0].album.name;
-    fs.appendFile("log.txt", "Album: " + album + "\n", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-    });
+    log.push("Album: " + album + "\n");
     console.log("Album: " + album);
+
+    writeLog(log);
   });
 }
 
@@ -214,7 +197,6 @@ function doWhatItSays() {
 
 * Do not overwrite your file each time you run a command. */
 function writeLog(log) {
-  console.log(log);
   for (element in log) {
     fs.appendFile("log.txt", log[element], function(err) {
       if (err) {
