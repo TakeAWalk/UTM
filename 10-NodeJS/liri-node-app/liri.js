@@ -43,6 +43,7 @@ function myTweets() {
     screen_name: "@davidpham",
     count: 20
   };
+
   client.get("statuses/user_timeline", params, function(
     error,
     tweets,
@@ -50,7 +51,13 @@ function myTweets() {
   ) {
     if (!error) {
       for (element in tweets) {
-        console.log(tweets[element].text);
+        var tweetText = tweets[element].text;
+        fs.appendFile("log.txt", tweetText + "\n", function(err) {
+          if (err) {
+            return console.log(err);
+          }
+        });
+        console.log(tweetText);
       }
     }
   });
@@ -76,14 +83,42 @@ function spotifyThisSong(songName = "The Sign") {
     }
 
     console.log("Artist[s]:");
-    for (element in data.tracks.items[0].artists)
-      console.log(data.tracks.items[0].artists[element].name);
 
-    console.log("Song Name: " + data.tracks.items[0].name);
+    for (element in data.tracks.items[0].artists) {
+      var artistName = data.tracks.items[0].artists[element].name;
+      console.log(artistName);
+      fs.appendFile("log.txt", "Artist: " + artistName + "\n", function(err) {
+        if (err) {
+          return console.log(err);
+        }
+      });
+    }
 
-    console.log("Preview Link: " + data.tracks.items[0].preview_url);
+    var sName = data.tracks.items[0].name;
+    fs.appendFile("log.txt", "Song Name: " + sName + "\n", function(err) {
+      if (err) {
+        return console.log(err);
+      }
+    });
+    console.log("Song Name: " + sName);
 
-    console.log("Album: " + data.tracks.items[0].album.name);
+    var previewURL = data.tracks.items[0].preview_url;
+    fs.appendFile("log.txt", "Preview Link: " + previewURL + "\n", function(
+      err
+    ) {
+      if (err) {
+        return console.log(err);
+      }
+    });
+    console.log("Preview Link: " + previewURL);
+
+    var album = data.tracks.items[0].album.name;
+    fs.appendFile("log.txt", "Album: " + album + "\n", function(err) {
+      if (err) {
+        return console.log(err);
+      }
+    });
+    console.log("Album: " + album);
   });
 }
 
@@ -111,23 +146,84 @@ function movieThis(movieName = "Mr. Nobody.") {
     if (!error && response.statusCode === 200) {
       // Parse the body of the site and recover just the imdbRating
       // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-      console.log("Title: " + JSON.parse(body).Title);
-      console.log("Release Year: " + JSON.parse(body).Year);
-      console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+      var title = JSON.parse(body).Title;
+      console.log("Title: " + title);
+      fs.appendFile("log.txt", "Title: " + title + "\n", function(err) {
+        if (err) {
+          return console.log(err);
+        }
+      });
+
+      var releaseYear = JSON.parse(body).Year;
+      console.log("Release Year: " + releaseYear);
+      fs.appendFile("log.txt", "Year: " + releaseYear + "\n", function(err) {
+        if (err) {
+          return console.log(err);
+        }
+      });
+
+      var imdbRating = JSON.parse(body).imdbRating;
+      console.log("IMDB Rating: " + imdbRating);
+      fs.appendFile("log.txt", "IMDB Rating: " + imdbRating + "\n", function(
+        err
+      ) {
+        if (err) {
+          return console.log(err);
+        }
+      });
 
       for (element in JSON.parse(body).Ratings) {
-        JSON.parse(body).Ratings[element].Source === "Rotten Tomatoes"
-          ? console.log(
-              "Rotten Tomatoes Rating: " +
-                JSON.parse(body).Ratings[element].Value
-            )
-          : 0;
+        if (JSON.parse(body).Ratings[element].Source === "Rotten Tomatoes") {
+          var rottenTomatoesRating = JSON.parse(body).Ratings[element].Value;
+          console.log("Rotten Tomatoes Rating: " + rottenTomatoesRating);
+
+          fs.appendFile(
+            "log.txt",
+            "Rotten Tomatoes Rating: " + rottenTomatoesRating + "\n",
+            function(err) {
+              if (err) {
+                return console.log(err);
+              }
+            }
+          );
+        }
       }
 
-      console.log("Country[ies]: " + JSON.parse(body).Country);
-      console.log("Language[s]:" + JSON.parse(body).Language);
-      console.log("Plot: " + JSON.parse(body).Plot);
-      console.log("Actor[s]: " + JSON.parse(body).Actors);
+      var country = JSON.parse(body).Country;
+      console.log("Country[ies]: " + country);
+      fs.appendFile("log.txt", "Country[ies]: " + country + "\n", function(
+        err
+      ) {
+        if (err) {
+          return console.log(err);
+        }
+      });
+
+      var language = JSON.parse(body).Language;
+      console.log("Language[s]:" + language);
+      fs.appendFile("log.txt", "Language[s]: " + language + "\n", function(
+        err
+      ) {
+        if (err) {
+          return console.log(err);
+        }
+      });
+
+      var plot = JSON.parse(body).Plot;
+      console.log("Plot: " + plot);
+      fs.appendFile("log.txt", "Plot: " + plot + "\n", function(err) {
+        if (err) {
+          return console.log(err);
+        }
+      });
+
+      var actors = JSON.parse(body).Actors;
+      console.log("Actor[s]: " + actors);
+      fs.appendFile("log.txt", "Actors: " + actors + "\n", function(err) {
+        if (err) {
+          return console.log(err);
+        }
+      });
     }
   });
 }
@@ -157,3 +253,12 @@ function doWhatItSays() {
 * Make sure you append each command you run to the `log.txt` file. 
 
 * Do not overwrite your file each time you run a command. */
+function writeLog(log) {
+  for (element in log) {
+    fs.appendFile("log.txt", element, function(err) {
+      if (err) {
+        return console.log(err);
+      }
+    });
+  }
+}
