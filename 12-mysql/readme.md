@@ -12,7 +12,7 @@ bamazonManager - Store management app that allows the manager to see products, r
 
 #### bamazonCustomer
 
-![Image of bamazonCustomer](https://takeawalk.github.io/UTM/12-mysql/media/customer - order.png)
+![Image of bamazonCustomer](https://takeawalk.github.io/UTM/12-mysql/media/customer-order.png)
 
 1. Using the printed table of available products, specify an item_id to purchase.
 2. Specify the quantity you wish to purchase.
@@ -28,13 +28,16 @@ The following options are available when the app is launched:
 
 - View Products for Sale
   - Display all inventory items
-    ![Image of bamazonManager inventory](https://takeawalk.github.io/UTM/12-mysql/media/manager - inventory.png)
+    ![Image of bamazonManager inventory](https://takeawalk.github.io/UTM/12-mysql/media/manager-inventory.png)
 - View Low Inventory
-  ![Image of bamazonManager inventory](https://takeawalk.github.io/UTM/12-mysql/media/manager - low inventory.png)
+  - View items with stock less than 5
+    ![Image of bamazonManager inventory](https://takeawalk.github.io/UTM/12-mysql/media/manager-lowinventory.png)
 - Add to Inventory
-  ![Image of bamazonManager inventory](https://takeawalk.github.io/UTM/12-mysql/media/manager - add inventory.png)
+  - Replenish inventory for a specific item
+    ![Image of bamazonManager inventory](https://takeawalk.github.io/UTM/12-mysql/media/manager-addinventory.png)
 - Add New Product
-  ![Image of bamazonManager inventory](https://takeawalk.github.io/UTM/12-mysql/media/manager - add new product.png)
+  - Add a new product
+    ![Image of bamazonManager inventory](https://takeawalk.github.io/UTM/12-mysql/media/manager-addnewproduct.png)
 
 ## How do I use this?
 
