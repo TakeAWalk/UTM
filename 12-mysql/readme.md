@@ -1,16 +1,20 @@
 # Node.js & MySQL Homework
 
-## Application: bAmazon
+## Application Name: **bAmazon**
 
 ### App Parts
 
-bamazonCustomer - Purchasing app allowing the customer to see products and make purchases while specifying quantities.
+#### bamazonCustomer.js
 
-bamazonManager - Store management app that allows the manager to see products, review low inventory items, restock and add new items.
+Purchasing app allowing the customer to see products and make purchases while specifying quantities.
+
+#### bamazonManager.js
+
+Store management app that allows the manager to see products, review low inventory items, restock and add new items.
 
 ### How to use the app?
 
-#### bamazonCustomer
+#### bamazonCustomer.js
 
 ![Image of bamazonCustomer](https://takeawalk.github.io/UTM/12-mysql/media/customer-order.png)
 
@@ -22,7 +26,7 @@ bamazonManager - Store management app that allows the manager to see products, r
      - the database is updated.
    - Otherwise you will recieve an error message of "Insufficient quantity!"
 
-#### bamazonManager
+#### bamazonManager.js
 
 The following options are available when the app is launched:
 
@@ -52,6 +56,8 @@ The following options are available when the app is launched:
   - [inquirer](https://www.npmjs.com/package/inquirer)
   - [mysql](https://www.npmjs.com/package/mysql)
 - [MySQL](https://www.mysql.com/)
+  - Database: bamazon
+  - Table: products
 
 ## Author
 
