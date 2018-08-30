@@ -8,6 +8,6 @@
 - [06-ajax](https://github.com/TakeAWalk/UTM/tree/master/06-ajax)
 - [07-firebase](https://github.com/TakeAWalk/UTM/tree/master/07-firebase)
 - Week 8 & 9
-  - [GroupProject](https://github.com/TakeAWalk/UTM/tree/master/GroupProject)
+  - [GroupProject](https://github.com/TakeAWalk/GroupProject)
 - [10-NodeJS](https://github.com/TakeAWalk/UTM/tree/master/10-NodeJS)
 - [12-mysql](https://github.com/TakeAWalk/UTM/tree/master/12-mysql)
