@@ -35,13 +35,12 @@ The following options are available when the app is launched:
     ![Image of bamazonManager inventory](https://takeawalk.github.io/UTM/12-mysql/media/manager-inventory.png)
 - View Low Inventory
   - View items with stock less than 5
-    ![Image of bamazonManager inventory](https://takeawalk.github.io/UTM/12-mysql/media/manager-lowinventory.png)
+    ![Image of report showing items with less than 5 in stock](https://takeawalk.github.io/UTM/12-mysql/media/manager-lowinventory.png)
 - Add to Inventory
   - Replenish inventory for a specific item
-    ![Image of bamazonManager inventory](https://takeawalk.github.io/UTM/12-mysql/media/manager-addinventory.png)
+    ![Image of restock functionality](https://takeawalk.github.io/UTM/12-mysql/media/manager-addinventory.png)
 - Add New Product
-  - Add a new product
-    ![Image of bamazonManager inventory](https://takeawalk.github.io/UTM/12-mysql/media/manager-addnewproduct.png)
+  ![Image of add a new product functionality](https://takeawalk.github.io/UTM/12-mysql/media/manager-addnewproduct.png)
 
 ## How do I use this?
 
