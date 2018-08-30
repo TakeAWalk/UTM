@@ -18,7 +18,6 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   itemsAvailableForSale();
-  menu();
 });
 
 function itemsAvailableForSale() {
@@ -28,6 +27,7 @@ function itemsAvailableForSale() {
   ) {
     if (err) throw err;
     console.table(res);
+    menu();
   });
 }
 
