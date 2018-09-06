@@ -1,5 +1,7 @@
 # University of Toronto Coding Bootcamp Homework Repo
 
+## Links to homework folders
+
 - [01-html-git-css](https://github.com/TakeAWalk/UTM/tree/master/01-html-git-css)
 - [02-css-bootstrap](https://github.com/TakeAWalk/UTM/tree/master/02-css-bootstrap)
 - [03-javascript](https://github.com/TakeAWalk/UTM/tree/master/03-javascript)
