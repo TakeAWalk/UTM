@@ -1,23 +1,30 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var path = require('path');
+// Dependencies
+// =============================================================
+var express = require("express");
+var bodyParser = require("body-parser");
 
-function Friend(name, photo, scores) {
-  this.name = name;
-  this.photo = photo;
-  this.scores = scores;
+// Tells node that we are creating an "express" server
+var app = express();
 
-  this.compareScores = friend => {
-    var acc = 0;
-    this.scores.forEach(
-      (currentValue, currentIndex) =>
-        (acc += Math.abs(currentValue - friend.scores[currentIndex]))
-    );
-    return acc;
-  };
-}
+// Sets an initial port. We"ll use this later in our listener
+var PORT = process.env.PORT || 3000;
 
-var friendA = new Friend('Charlie', 'no photo', [4, 3, 4]);
-var friendB = new Friend('Donald', 'no photo', [10, 2, 3]);
+// Sets up the Express app to handle data parsing
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-console.log(friendA.compareScores(friendB));
+// ================================================================================
+// ROUTER
+// The below points our server to a series of "route" files.
+// These routes give our server a "map" of how to respond when users visit or request data from various URLs.
+// ================================================================================
+require("./app/routing/apiRoutes.js")(app);
+require("./app/routing/htmlRoutes.js")(app);
+
+// =============================================================================
+// LISTENER
+// The below code effectively "starts" our server
+// =============================================================================
+app.listen(PORT, function() {
+  console.log("App listening on PORT " + PORT);
+});
