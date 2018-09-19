@@ -1,0 +1,19 @@
+<section class='col-6 toEat border'>
+    <h1>Ready to eat</h1>
+    {{#each burger}}
+    {{#unless devoured}}
+    <p>{{burger_name}}
+        <button class='devour' data-id="{{id}}" burger_name='{{burger_name}}'>Devour</button>
+    </p>
+    {{/unless}}
+    {{/each}}
+</section>
+
+<section class='col-6 devoured border'>
+    <h1>Devoured</h1>
+    {{#each burger}}
+    {{#if devoured}}
+    <p>{{burger_name}}</p>
+    {{/if}}
+    {{/each}}
+</section>
