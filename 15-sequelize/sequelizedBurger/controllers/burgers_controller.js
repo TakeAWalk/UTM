@@ -1,36 +1,38 @@
 var express = require("express");
 
-var burger = require("../models/burger");
+var Burger = require("../models/burger");
 
 var app = express();
 
 app.get("/", (req, res) => {
-  burger.all(data => {
-    res.render("index", { burger: data });
-  });
-});
-
-app.get("/", (req, res) => {
-  burger.all(data => {
-    res.render("index", { burger: data });
+  Burger.findAll({}).then(result => {
+    res.render("index", { burger: result });
   });
 });
 
 app.post("/", (req, res) => {
-  burger.insert(req.body.burger_name, ressult => {
+  Burger.create({
+    burger_name: req.body.burger_name,
+    devoured: 0
+  }).then(result => {
     res.status(200).end();
   });
 });
 
 app.put("/", (req, res) => {
-  burger.update(
-    req.body.burger_name,
-    req.body.devoured,
-    req.body.id,
-    result => {
-      res.status(200).end();
+  Burger.update(
+    {
+      burger_name: req.body.burger_name,
+      devoured: req.body.devoured
+    },
+    {
+      where: {
+        id: req.body.id
+      }
     }
-  );
+  ).then(result => {
+    res.status(200).end();
+  });
 });
 
 module.exports = app;

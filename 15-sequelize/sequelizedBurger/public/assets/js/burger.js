@@ -5,7 +5,8 @@ $(function() {
     var newBurger = {
       id: $(this).data("id"),
       burger_name: $(this).attr("burger_name"),
-      devoured: 1
+      devoured: 1,
+      name: "David"
     };
 
     console.log(newBurger);
