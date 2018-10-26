@@ -1,14 +1,18 @@
 import React from "react";
+import "../css/navbar.css";
 
-const Navbar = props => (
-  <nav className="navbar">
-    <ul>
-      <li className="brand">Clicky Game</li>
-      <li className="score">Score: {props.score}</li>
-      <li className="highScore">High Score: {props.score}</li>
-    </ul>
-    navbar
-  </nav>
-);
+const Navbar = ({ score, statusText, highScore }) => {
+  return (
+    <nav className="navbar">
+      <ul>
+        <li className="brand">Clicky Game</li>
+        <li className="status-text">{statusText}</li>
+        <li className="score">
+          Score: {score} | High Score: {highScore}
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
 export default Navbar;

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+
 import "./App.css";
+
 import Header from "./components/header";
 import Navbar from "./components/navbar";
 import Container from "./components/container";
@@ -50,22 +52,37 @@ const defaultCards = [
     id: 9,
     brand: "fab fa-linkedin-in fa-10x",
     clicked: false
+  },
+  {
+    id: 10,
+    brand: "fab fa-github fa-10x",
+    clicked: false
+  },
+  {
+    id: 11,
+    brand: "fab fa-npm fa-10x",
+    clicked: false
+  },
+  {
+    id: 12,
+    brand: "fab fa-node fa-10x",
+    clicked: false
   }
 ];
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      counter: 0,
-      highScore: 0,
-      cards: defaultCards
-    };
-  }
+  state = {
+    counter: 0,
+    highScore: 0,
+    statusText: "Click an image to begin!",
+    cards: defaultCards
+  };
 
   handleIncrement = event => {
+    // Create a copy of the state.cards array as we don't want to modify state directly
     const prevCards = this.state.cards.slice();
 
+    // Find the card in the array that matches the calling target.
     const card = prevCards.find(
       element =>
         element.id ===
@@ -73,27 +90,45 @@ class App extends Component {
     );
 
     try {
-      prevCards.splice(
-        prevCards.findIndex(element => element.id === card.id),
-        1,
-        card
-      );
-
+      // If the card has been clicked previously:
       if (card.clicked) {
-        this.setState({ counter: 0, cards: defaultCards });
-      } else {
-        card.clicked = true;
+        prevCards.forEach((element, index) => {
+          prevCards[index].clicked = false;
+        });
+        console.log(prevCards);
+        // Reset the counter and cards array to the initial state
         this.setState({
-          counter: this.state.counter + 1,
+          counter: 0,
+          statusText: "You guessed incorrectly!",
           cards: prevCards
         });
-      }
+      } else {
+        // Update the card's clicked value to true.
+        card.clicked = true;
 
-      if (this.state.counter > this.state.highScore) {
-        this.setState({ highScore: this.state.counter });
-      }
+        // Remove matching card from the array and add the updated card
+        prevCards.splice(
+          prevCards.findIndex(element => element.id === card.id),
+          1,
+          card
+        );
 
-      console.log(this.state);
+        // Otherwise update the cards and increment the counter and highscore if necessary
+        if (this.state.counter >= this.state.highScore) {
+          this.setState({
+            counter: this.state.counter + 1,
+            statusText: "You guessed correctly!",
+            highScore: this.state.counter + 1,
+            cards: prevCards
+          });
+        } else {
+          this.setState({
+            counter: this.state.counter + 1,
+            statusText: "You guessed correctly!",
+            cards: prevCards
+          });
+        }
+      }
     } catch (error) {
       console.log(error);
     }
@@ -102,9 +137,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar score={this.state.counter} highScore={this.state.highScore} />
+        <Navbar
+          score={this.state.counter}
+          statusText={this.state.statusText}
+          highScore={this.state.highScore}
+        />
         <Header />
-        <Container cards={this.state.cards} onClick={this.handleIncrement} />
+        <div className="container">
+          <Container cards={this.state.cards} onClick={this.handleIncrement} />
+        </div>
         <Footer />
       </div>
     );
