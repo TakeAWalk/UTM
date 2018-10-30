@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import Search from "./Search";
 import Results from "./Results";
@@ -9,12 +10,22 @@ import "../css/Scrubber.css";
 class Scrubber extends Component {
   state = {
     search: "",
+    startDate: "",
+    endDate: "",
     articles: [],
     savedArticles: []
   };
 
   handleChange = event => {
     this.setState({ search: event.target.value });
+  };
+
+  handleStartChange = event => {
+    this.setState({ startDate: event.target.value });
+  };
+
+  handleEndChange = event => {
+    this.setState({ startDate: event.target.value });
   };
 
   handleSubmit = event => {
@@ -88,24 +99,65 @@ class Scrubber extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <div className="container">
-            <h1>New York Times Article Scrubber</h1>
-            <h4>Search for and annotate articles of interest!</h4>
-          </div>
-        </header>
-        <Search
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-        />
-        <Results articles={this.state.articles} handleSave={this.handleSave} />
-        <SavedArticles
-          handleRemove={this.handleRemove}
-          savedArticles={this.state.savedArticles}
-          getSavedArticles={this.getSavedArticles}
-        />
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <nav>
+            <div className="nav-wrapper blue">
+              <ul id="nav-mobile" className="left hide-on-med-and-down">
+                <li>
+                  <Link to="/">Search</Link>
+                </li>
+                <li>
+                  <Link to="/results">Results</Link>
+                </li>
+                <li>
+                  <Link to="/savedArticles">Saved Articles</Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <header className="App-header">
+            <div className="container">
+              <h1>New York Times Article Scrubber</h1>
+              <h4>Search for and annotate articles of interest!</h4>
+            </div>
+          </header>
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <Search
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
+                handleStartChange={this.handleStartChange}
+                handleEndChange={this.handleEndChange}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/results"
+            render={props => (
+              <Results
+                articles={this.state.articles}
+                handleSave={this.handleSave}
+              />
+            )}
+          />
+
+          <Route
+            exact
+            path="/savedArticles"
+            render={props => (
+              <SavedArticles
+                handleRemove={this.handleRemove}
+                savedArticles={this.state.savedArticles}
+                getSavedArticles={this.getSavedArticles}
+              />
+            )}
+          />
+        </div>
+      </BrowserRouter>
     );
   }
 }

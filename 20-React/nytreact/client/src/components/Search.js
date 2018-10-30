@@ -20,13 +20,23 @@ const Search = props => (
         <div className="row">
           <div className="input-field col s6">
             <i className="material-icons prefix">date_range</i>
-            <input id="start_year" type="text" className="validate" />
+            <input
+              id="start_year"
+              type="text"
+              className="validate"
+              onChange={props.handleStartChange}
+            />
             <label htmlFor="start_year">Start Year</label>
           </div>
 
           <div className="input-field col s6">
             <i className="material-icons prefix">date_range</i>
-            <input id="end_year" type="text" className="validate" />
+            <input
+              id="end_year"
+              type="text"
+              className="validate"
+              onChange={props.handleEndChange}
+            />
             <label htmlFor="end_year">End Year</label>
           </div>
         </div>

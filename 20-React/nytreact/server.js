@@ -50,10 +50,6 @@ app.delete("/api/deletedSavedArticle/:id", (req, res) => {
   });
 });
 
-app.post("/api/articles", (req, res) => res.send("POST: api/articles"));
-
-app.delete("/api/articles", (req, res) => res.send("DELETE: api/articles"));
-
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "../client/build/index.html"))
 );
