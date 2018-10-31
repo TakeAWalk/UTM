@@ -2,7 +2,7 @@
   border-style: solid;
 
   display: grid;
-  grid-template-columns: 6fr 2fr 1fr;
+  grid-template-columns: 6fr 3fr 1fr;
   justify-items: start;
   align-items: center;
 

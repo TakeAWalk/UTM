@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/SavedArticles.css";
+import moment from "moment";
 
 class SavedArticles extends Component {
   componentDidMount() {
@@ -22,7 +23,7 @@ class SavedArticles extends Component {
                 {article.title}
               </a>
             </p>
-            <p>Date Saved: {article.date}</p>
+            <p>Date Saved: {moment(article.date).format("MMMM Do YYYY")}</p>
             <button className="btn" onClick={this.props.handleRemove}>
               Remove
             </button>

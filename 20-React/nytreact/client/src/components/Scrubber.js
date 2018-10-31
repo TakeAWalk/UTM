@@ -25,12 +25,21 @@ class Scrubber extends Component {
   };
 
   handleEndChange = event => {
-    this.setState({ startDate: event.target.value });
+    this.setState({ endDate: event.target.value });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    fetch(`http://localhost:4000/api/scrub/${this.state.search}`)
+    let beginDate = this.state.startDate || 1900;
+    beginDate += "0101";
+    let endDate = this.state.endDate || 2018;
+    endDate += "1231";
+
+    fetch(
+      `http://localhost:4000/api/scrub/${
+        this.state.search
+      }/${beginDate}/${endDate}`
+    )
       .then(res => res.json())
       .then(articles => {
         this.setState({ articles });
@@ -108,9 +117,6 @@ class Scrubber extends Component {
                   <Link to="/">Search</Link>
                 </li>
                 <li>
-                  <Link to="/results">Results</Link>
-                </li>
-                <li>
                   <Link to="/savedArticles">Saved Articles</Link>
                 </li>
               </ul>
@@ -126,22 +132,18 @@ class Scrubber extends Component {
             exact
             path="/"
             render={props => (
-              <Search
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-                handleStartChange={this.handleStartChange}
-                handleEndChange={this.handleEndChange}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/results"
-            render={props => (
-              <Results
-                articles={this.state.articles}
-                handleSave={this.handleSave}
-              />
+              <div>
+                <Search
+                  handleChange={this.handleChange}
+                  handleSubmit={this.handleSubmit}
+                  handleStartChange={this.handleStartChange}
+                  handleEndChange={this.handleEndChange}
+                />
+                <Results
+                  articles={this.state.articles}
+                  handleSave={this.handleSave}
+                />
+              </div>
             )}
           />
 

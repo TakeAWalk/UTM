@@ -22,8 +22,10 @@ const Search = props => (
             <i className="material-icons prefix">date_range</i>
             <input
               id="start_year"
-              type="text"
+              type="number"
               className="validate"
+              min="1800"
+              max="2018"
               onChange={props.handleStartChange}
             />
             <label htmlFor="start_year">Start Year</label>
@@ -33,8 +35,10 @@ const Search = props => (
             <i className="material-icons prefix">date_range</i>
             <input
               id="end_year"
-              type="text"
+              type="number"
               className="validate"
+              min="1800"
+              max="2018"
               onChange={props.handleEndChange}
             />
             <label htmlFor="end_year">End Year</label>

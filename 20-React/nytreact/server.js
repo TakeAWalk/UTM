@@ -17,14 +17,13 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.get("/api/scrub/:q", (req, res) => {
-  db.scrub(req.params.q, result => {
-    res.send(result);
-  });
-});
-
-app.get("/api/scrape", (req, res) => {
-  db.scrapeWebDev(result => {
+app.get("/api/scrub/:q/:begin_date/:end_date", (req, res) => {
+  const query = {
+    q: req.params.q,
+    begin_date: req.params.begin_date,
+    end_date: req.params.end_date
+  };
+  db.scrub(query, result => {
     res.send(result);
   });
 });
